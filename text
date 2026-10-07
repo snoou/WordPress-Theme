@@ -1,0 +1,1960 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+/* =========================================================
+   01. ROOT & GLOBALS
+========================================================= */
+:root {
+    --primary-color: #4A3C4D;
+    --secondary-color: #D2B4DE;
+    --glow-color: rgba(210, 180, 222, 0.4);
+    --bg-color: #FBFBFB;
+    --text-color: #333333;
+    --container-width: min(1400px, 94%);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+@media (min-width: 993px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    body {
+        padding-bottom: 90px;
+    }
+}
+
+/* =========================================================
+   02. HEADER 
+========================================================= */
+.luxury-desktop-header {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 0 5%;
+    pointer-events: none;
+    direction: rtl;
+    width: 100%;
+}
+
+.luxury-header-inner {
+    pointer-events: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--container-width);
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 10px 35px rgba(74, 60, 77, 0.08);
+}
+
+.header-brand .brand-text {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.header-nav-center ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.header-nav-center a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.header-nav-center>ul>li>a:hover {
+    color: var(--primary-color);
+    background: rgba(210, 180, 222, 0.15);
+}
+
+.header-icons-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.luxury-icon-btn {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 0.3s;
+}
+
+.luxury-icon-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(74, 60, 77, 0.3);
+}
+
+/* =========================================================
+   03. WOOCOMMERCE SINGLE PRODUCT
+========================================================= */
+
+/* مخفی کردن سایدبار و زواید قالب */
+.single-product #secondary,
+.single-product .widget-area,
+.single-product .sidebar {
+    display: none !important;
+}
+
+/* -----------------------------------------
+   مسیر راهنما (Breadcrumb) 
+----------------------------------------- */
+.woocommerce .woocommerce-breadcrumb {
+    width: var(--container-width) !important;
+    margin: 130px auto 20px auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    color: #888 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.woocommerce .woocommerce-breadcrumb a {
+    color: #555 !important;
+    text-decoration: none !important;
+    font-weight: 800 !important;
+    transition: 0.3s;
+}
+
+.woocommerce .woocommerce-breadcrumb a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* -----------------------------------------
+   کانتینر اصلی
+----------------------------------------- */
+.woocommerce div.product {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: var(--container-width) !important;
+    margin: 0 auto 80px !important;
+    direction: rtl !important;
+}
+
+.woocommerce div.product::before,
+.woocommerce div.product::after {
+    display: none !important;
+}
+
+/* -----------------------------------------
+   ستون راست: گالری عکس (حل قطعی مشکل کلیک و اسلایدر)
+----------------------------------------- */
+.woocommerce div.product div.images {
+    width: 42% !important;
+    float: none !important;
+    margin: 0 !important;
+    position: sticky !important;
+    top: 100px !important;
+}
+
+/* کدهای مخرب محدودکننده از اینجا پاک شدند تا اسلایدر آزادانه حرکت کند */
+.woocommerce div.product div.images .woocommerce-product-gallery__wrapper {
+    border-radius: 20px !important;
+    border: 1px solid #f0f0f0 !important;
+    background: #fff !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+}
+
+/* پنهان کردن فلش‌های چپ و راست پیش‌فرض روی عکس اصلی */
+.woocommerce div.product div.images .flex-direction-nav {
+    display: none !important;
+}
+
+/* عکس‌های کوچک (Thumbnails) */
+.woocommerce div.product div.images .flex-control-thumbs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    /* لمسی برای کشیدن به چپ و راست */
+    gap: 12px !important;
+    margin-top: 15px !important;
+    padding: 5px 0 10px 0 !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    list-style: none !important;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs::-webkit-scrollbar {
+    display: none;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li {
+    width: 80px !important;
+    flex: 0 0 80px !important;
+    /* ثابت نگه‌داشتن سایز عکس‌های کوچک */
+    float: none !important;
+    clear: none !important;
+    margin: 0 !important;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs img {
+    border-radius: 12px !important;
+    border: 2px solid transparent !important;
+    opacity: 0.5 !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs img.flex-active,
+.woocommerce div.product div.images .flex-control-thumbs img:hover {
+    opacity: 1 !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* بج حراج */
+.woocommerce div.product span.onsale {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    background: #E74C3C !important;
+    color: #fff !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    padding: 5px 15px !important;
+    border-radius: 20px !important;
+    z-index: 99 !important;
+    margin: 0 !important;
+}
+
+/* -----------------------------------------
+   ستون چپ: اطلاعات و دکمه خرید
+----------------------------------------- */
+.woocommerce div.product div.summary {
+    width: 55% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 35px !important;
+    background: #FAF6FA !important;
+    border-radius: 24px !important;
+}
+
+.woocommerce div.product .product_title {
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    color: #222 !important;
+    margin: 0 0 15px !important;
+}
+
+.woocommerce div.product p.price {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: var(--primary-color) !important;
+    margin-bottom: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.woocommerce div.product p.price del {
+    font-size: 15px !important;
+    color: #aaa !important;
+    font-weight: normal !important;
+}
+
+.woocommerce div.product p.price ins {
+    text-decoration: none !important;
+}
+
+/* دکمه خرید */
+.woocommerce div.product form.cart {
+    display: flex !important;
+    gap: 15px !important;
+    margin-bottom: 25px !important;
+    align-items: stretch !important;
+}
+
+.woocommerce div.product form.cart div.quantity {
+    float: none !important;
+    margin: 0 !important;
+}
+
+.woocommerce div.product form.cart input.qty {
+    width: 70px !important;
+    height: 55px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(210, 180, 222, 0.5) !important;
+    text-align: center !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    background: #fff !important;
+}
+
+.woocommerce div.product form.cart .button {
+    flex: 1 !important;
+    height: 55px !important;
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    transition: 0.3s !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.woocommerce div.product form.cart .button:hover {
+    background: #362c38 !important;
+}
+
+.woocommerce div.product .woocommerce-product-details__short-description {
+    font-size: 14px !important;
+    line-height: 1.9 !important;
+    color: #555 !important;
+    margin-top: 25px !important;
+    padding-top: 25px !important;
+    border-top: 1px solid rgba(210, 180, 222, 0.3) !important;
+}
+
+/* خط گواش یاسی زیر دسته‌بندی */
+.woocommerce div.product .product_meta {
+    font-size: 13px !important;
+    color: #888 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid rgba(210, 180, 222, 0.3) !important;
+    margin-top: 20px !important;
+}
+
+.woocommerce div.product .product_meta .posted_in a {
+    position: relative;
+    display: inline-block;
+    color: var(--primary-color) !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    z-index: 1;
+    padding: 0 4px;
+}
+
+.woocommerce div.product .product_meta .posted_in a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    height: 8px;
+    background: var(--glow-color);
+    z-index: -1;
+    border-radius: 4px;
+    transform: skewX(-15deg);
+}
+
+/* =========================================
+   تب‌ها (توضیحات و نظرات)
+========================================= */
+.woocommerce div.product .woocommerce-tabs {
+    width: 100% !important;
+    margin-top: 70px !important;
+    clear: both !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    display: flex !important;
+    gap: 30px !important;
+    border-bottom: 2px solid #eaeaea !important;
+    padding: 0 !important;
+    margin: 0 0 30px !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 0 15px !important;
+    margin: 0 0 -2px !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li::before,
+.woocommerce div.product .woocommerce-tabs ul.tabs li::after {
+    display: none !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    color: #888 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    padding: 0 !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+    border-bottom: 3px solid var(--primary-color) !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    color: var(--primary-color) !important;
+}
+
+.woocommerce div.product .woocommerce-tabs .panel {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #555;
+}
+
+/* ستاره‌های طلایی */
+.woocommerce p.stars a {
+    position: relative;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+}
+
+.woocommerce p.stars a::before {
+    content: "★";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 26px;
+    text-align: center;
+    color: #ddd;
+    text-indent: 0;
+    transition: color 0.2s;
+}
+
+.woocommerce p.stars a:hover~a::before {
+    color: #ddd !important;
+}
+
+.woocommerce p.stars:hover a::before,
+.woocommerce p.stars.selected a:not(.active)::before,
+.woocommerce p.stars.selected a.active::before {
+    color: #FFD700;
+}
+
+.woocommerce p.stars.selected a.active~a::before {
+    color: #ddd;
+}
+
+/* فرم ثبت نظر */
+#review_form_wrapper {
+    background: #FAF6FA;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+#review_form_wrapper label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#review_form_wrapper input[type="text"],
+#review_form_wrapper input[type="email"],
+#review_form_wrapper textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-family: inherit;
+}
+
+#review_form_wrapper .submit {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#review_form_wrapper .submit:hover {
+    background: #362c38;
+}
+
+#reviews h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+#reviews .commentlist {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#reviews .commentlist li {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+#reviews .commentlist li img.avatar {
+    float: right;
+    border-radius: 50%;
+    margin-left: 15px;
+    width: 50px;
+}
+
+/* =========================================
+   04. محصولات مرتبط
+========================================= */
+.woocommerce .related.products {
+    width: 100% !important;
+    margin-top: 80px !important;
+    clear: both !important;
+}
+
+.woocommerce .related.products>h2 {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    margin-bottom: 25px !important;
+    color: #222 !important;
+}
+
+.woocommerce ul.products::before,
+.woocommerce ul.products::after {
+    display: none !important;
+}
+
+.woocommerce ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* حل باگ کلاس last */
+.woocommerce ul.products li.product {
+    width: 100% !important;
+    margin: 0 !important;
+    clear: none !important;
+    float: none !important;
+    text-align: center !important;
+    list-style: none !important;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+    transition: 0.3s;
+}
+
+.woocommerce ul.products li.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.woocommerce ul.products li.product img {
+    border-radius: 15px;
+    margin-bottom: 15px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.woocommerce ul.products li.product .price {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.woocommerce ul.products li.product .button {
+    display: none !important;
+}
+
+/* =========================================================
+   05. RESPONSIVE (موبایل و تبلت)
+========================================================= */
+@media (max-width: 992px) {
+    .woocommerce div.product {
+        gap: 30px !important;
+    }
+
+    .woocommerce div.product div.images,
+    .woocommerce div.product div.summary {
+        width: 100% !important;
+    }
+
+    .woocommerce div.product div.images {
+        position: static !important;
+    }
+
+    .woocommerce ul.products {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .woocommerce .woocommerce-breadcrumb {
+        margin: 80px auto 20px !important;
+        width: 92% !important;
+        font-size: 11px !important;
+    }
+
+    .woocommerce div.product {
+        width: 92% !important;
+        margin: 0 auto 60px !important;
+    }
+
+    .woocommerce div.product div.summary {
+        padding: 25px 20px !important;
+    }
+
+    .woocommerce div.product .product_title {
+        font-size: 22px !important;
+    }
+
+    .woocommerce div.product p.price {
+        font-size: 20px !important;
+    }
+
+    .woocommerce div.product form.cart {
+        gap: 10px !important;
+    }
+
+    .woocommerce div.product form.cart input.qty {
+        width: 55px !important;
+        height: 50px !important;
+        font-size: 16px !important;
+    }
+
+    .woocommerce div.product form.cart .button {
+        height: 50px !important;
+        font-size: 14px !important;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 20px !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs li a {
+        font-size: 15px !important;
+        white-space: nowrap !important;
+    }
+
+    .woocommerce .related.products>h2 {
+        font-size: 18px !important;
+    }
+
+    .woocommerce ul.products {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 15px !important;
+        padding-bottom: 20px !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .woocommerce ul.products::-webkit-scrollbar {
+        display: none;
+    }
+
+    .woocommerce ul.products li.product {
+        flex: 0 0 55% !important;
+        scroll-snap-align: start !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+/* =========================================================
+   01. ROOT & GLOBALS
+========================================================= */
+:root {
+    --primary-color: #4A3C4D;
+    --secondary-color: #D2B4DE;
+    --glow-color: rgba(210, 180, 222, 0.4);
+    --bg-color: #FBFBFB;
+    --text-color: #333333;
+    --container-width: min(1400px, 94%);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { width: 100%; max-width: 100%; overflow-x: hidden !important; }
+body { font-family: 'Vazirmatn', sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; direction: rtl; }
+
+@media (min-width: 993px) { .mobile-only { display: none !important; } }
+@media (max-width: 992px) { .desktop-only { display: none !important; } body { padding-bottom: 90px; } }
+
+/* =========================================================
+   02. HEADER 
+========================================================= */
+.luxury-desktop-header { position: fixed; top: 24px; left: 0; right: 0; z-index: 10000; padding: 0 5%; pointer-events: none; direction: rtl; width: 100%; }
+.luxury-header-inner { pointer-events: auto; display: flex; justify-content: space-between; align-items: center; width: var(--container-width); margin: 0 auto; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 50px; padding: 10px 20px; box-shadow: 0 10px 35px rgba(74, 60, 77, 0.08); }
+.header-brand .brand-text { font-size: 24px; font-weight: 900; color: var(--primary-color); text-decoration: none; }
+.header-nav-center ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 15px; align-items: center; }
+.header-nav-center a { text-decoration: none; color: #444; font-weight: 600; font-size: 13px; padding: 8px 14px; border-radius: 30px; transition: 0.3s; }
+.header-nav-center > ul > li > a:hover { color: var(--primary-color); background: rgba(210, 180, 222, 0.15); }
+.header-icons-left { display: flex; align-items: center; gap: 10px; }
+.luxury-icon-btn { width: 42px; height: 42px; background: var(--primary-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: relative; transition: 0.3s; }
+.luxury-icon-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(74, 60, 77, 0.3); }
+
+/* =========================================================
+   03. WOOCOMMERCE SINGLE PRODUCT
+========================================================= */
+
+/* مخفی کردن سایدبار و زواید قالب */
+.single-product #secondary, .single-product .widget-area, .single-product .sidebar { display: none !important; }
+
+/* -----------------------------------------
+   مسیر راهنما (Breadcrumb) 
+----------------------------------------- */
+.woocommerce .woocommerce-breadcrumb {
+    width: var(--container-width) !important;
+    margin: 130px auto 20px auto !important; 
+    padding: 0 !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    color: #888 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+.woocommerce .woocommerce-breadcrumb a { color: #555 !important; text-decoration: none !important; font-weight: 800 !important; transition: 0.3s; }
+.woocommerce .woocommerce-breadcrumb a:hover { color: var(--primary-color) !important; }
+
+/* -----------------------------------------
+   کانتینر اصلی
+----------------------------------------- */
+.woocommerce div.product {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: var(--container-width) !important;
+    margin: 0 auto 80px !important;
+    direction: rtl !important;
+}
+.woocommerce div.product::before, .woocommerce div.product::after { display: none !important; }
+
+/* -----------------------------------------
+   ستون راست: گالری عکس (سیستم اختصاصی جدید)
+----------------------------------------- */
+.woocommerce div.product div.images {
+    width: 42% !important;
+    float: none !important;
+    margin: 0 !important;
+    position: sticky !important;
+    top: 100px !important;
+}
+
+/* کادر دور عکس اصلی */
+.woocommerce div.product div.images .woocommerce-product-gallery__wrapper {
+    border-radius: 20px !important;
+    border: 1px solid #f0f0f0 !important;
+    background: #fff !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    transform: none !important; /* مهار کردن اسلایدر خراب ووکامرس */
+}
+
+/* پنهان کردن فلش‌های چپ و راست پیش‌فرض روی عکس اصلی */
+.woocommerce div.product div.images .flex-direction-nav { display: none !important; }
+
+/* جادوی CSS برای سیستم تعویض عکس اختصاصی ما */
+.woocommerce div.product div.images .woocommerce-product-gallery__image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.4s ease !important; /* افکت محو شدن نرم */
+    z-index: 1 !important;
+    margin: 0 !important;
+}
+/* عکسی که کلاس فعال می‌گیرد نمایش داده می‌شود */
+.woocommerce div.product div.images .woocommerce-product-gallery__image.ns-active-img {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2 !important;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+}
+
+/* عکس‌های کوچک پایین (Thumbnails) */
+.woocommerce div.product div.images .flex-control-thumbs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important; /* لمسی برای کشیدن به چپ و راست */
+    gap: 12px !important;
+    margin-top: 15px !important;
+    padding: 5px 0 10px 0 !important;
+    -ms-overflow-style: none; scrollbar-width: none;
+    list-style: none !important;
+}
+.woocommerce div.product div.images .flex-control-thumbs::-webkit-scrollbar { display: none; }
+.woocommerce div.product div.images .flex-control-thumbs li {
+    width: 80px !important;
+    flex: 0 0 80px !important;
+    float: none !important;
+    clear: none !important;
+    margin: 0 !important;
+}
+.woocommerce div.product div.images .flex-control-thumbs img {
+    border-radius: 12px !important;
+    border: 2px solid transparent !important;
+    opacity: 0.5 !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+    width: 100% !important;
+    height: auto !important;
+}
+.woocommerce div.product div.images .flex-control-thumbs img.flex-active,
+.woocommerce div.product div.images .flex-control-thumbs img:hover {
+    opacity: 1 !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* بج حراج */
+.woocommerce div.product span.onsale {
+    position: absolute !important;
+    top: 15px !important; right: 15px !important; left: auto !important;
+    background: #E74C3C !important; color: #fff !important;
+    font-size: 13px !important; font-weight: bold !important;
+    padding: 5px 15px !important; border-radius: 20px !important; z-index: 99 !important; margin: 0 !important;
+}
+
+/* -----------------------------------------
+   ستون چپ: اطلاعات و دکمه خرید
+----------------------------------------- */
+.woocommerce div.product div.summary {
+    width: 55% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 35px !important;
+    background: #FAF6FA !important;
+    border-radius: 24px !important;
+}
+
+.woocommerce div.product .product_title { font-size: 28px !important; font-weight: 900 !important; color: #222 !important; margin: 0 0 15px !important; }
+.woocommerce div.product p.price { font-size: 26px !important; font-weight: 800 !important; color: var(--primary-color) !important; margin-bottom: 25px !important; display: flex !important; align-items: center !important; gap: 12px !important; }
+.woocommerce div.product p.price del { font-size: 15px !important; color: #aaa !important; font-weight: normal !important; }
+.woocommerce div.product p.price ins { text-decoration: none !important; }
+
+/* دکمه خرید */
+.woocommerce div.product form.cart { display: flex !important; gap: 15px !important; margin-bottom: 25px !important; align-items: stretch !important; }
+.woocommerce div.product form.cart div.quantity { float: none !important; margin: 0 !important; }
+.woocommerce div.product form.cart input.qty { width: 70px !important; height: 55px !important; border-radius: 12px !important; border: 1px solid rgba(210, 180, 222, 0.5) !important; text-align: center !important; font-size: 18px !important; font-weight: bold !important; background: #fff !important; }
+.woocommerce div.product form.cart .button { flex: 1 !important; height: 55px !important; background: var(--primary-color) !important; color: #fff !important; border-radius: 12px !important; font-size: 16px !important; font-weight: 700 !important; border: none !important; transition: 0.3s !important; display: flex !important; justify-content: center !important; align-items: center !important; }
+.woocommerce div.product form.cart .button:hover { background: #362c38 !important; }
+
+.woocommerce div.product .woocommerce-product-details__short-description { font-size: 14px !important; line-height: 1.9 !important; color: #555 !important; margin-top: 25px !important; padding-top: 25px !important; border-top: 1px solid rgba(210, 180, 222, 0.3) !important; }
+
+/* خط گواش یاسی زیر دسته‌بندی */
+.woocommerce div.product .product_meta { font-size: 13px !important; color: #888 !important; display: flex !important; flex-direction: column !important; gap: 10px !important; padding-top: 20px !important; border-top: 1px solid rgba(210, 180, 222, 0.3) !important; margin-top: 20px !important; }
+.woocommerce div.product .product_meta .posted_in a { position: relative; display: inline-block; color: var(--primary-color) !important; font-weight: 800 !important; text-decoration: none !important; z-index: 1; padding: 0 4px; }
+.woocommerce div.product .product_meta .posted_in a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 8px; background: var(--glow-color); z-index: -1; border-radius: 4px; transform: skewX(-15deg); }
+
+/* =========================================
+   تب‌ها (توضیحات و نظرات)
+========================================= */
+.woocommerce div.product .woocommerce-tabs { width: 100% !important; margin-top: 70px !important; clear: both !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs { display: flex !important; gap: 30px !important; border-bottom: 2px solid #eaeaea !important; padding: 0 !important; margin: 0 0 30px !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li { background: transparent !important; border: none !important; padding: 0 0 15px !important; margin: 0 0 -2px !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li::before, .woocommerce div.product .woocommerce-tabs ul.tabs li::after { display: none !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li a { color: #888 !important; font-size: 18px !important; font-weight: 700 !important; padding: 0 !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active { border-bottom: 3px solid var(--primary-color) !important; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--primary-color) !important; }
+.woocommerce div.product .woocommerce-tabs .panel { font-size: 14px; line-height: 1.9; color: #555; }
+
+/* ستاره‌های طلایی */
+.woocommerce p.stars a { position: relative; display: inline-block; text-indent: -9999px; width: 24px; height: 24px; margin-left: 5px; }
+.woocommerce p.stars a::before { content: "★"; display: block; position: absolute; top: 0; left: 0; width: 24px; height: 24px; line-height: 24px; font-size: 26px; text-align: center; color: #ddd; text-indent: 0; transition: color 0.2s; }
+.woocommerce p.stars a:hover ~ a::before { color: #ddd !important; }
+.woocommerce p.stars:hover a::before, .woocommerce p.stars.selected a:not(.active)::before, .woocommerce p.stars.selected a.active::before { color: #FFD700; }
+.woocommerce p.stars.selected a.active ~ a::before { color: #ddd; }
+
+/* فرم ثبت نظر */
+#review_form_wrapper { background: #FAF6FA; padding: 30px; border-radius: 20px; margin-top: 30px; }
+#review_form_wrapper label { font-size: 13px; font-weight: 700; color: #555; display: block; margin-bottom: 8px; }
+#review_form_wrapper input[type="text"], #review_form_wrapper input[type="email"], #review_form_wrapper textarea { width: 100%; border: 1px solid #ddd; border-radius: 10px; padding: 12px; margin-bottom: 15px; font-family: inherit; }
+#review_form_wrapper .submit { background: var(--primary-color); color: #fff; padding: 12px 30px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+#review_form_wrapper .submit:hover { background: #362c38; }
+
+#reviews h2 { font-size: 20px; font-weight: 800; color: #222; margin-bottom: 25px; }
+#reviews .commentlist { padding: 0; margin: 0; list-style: none; }
+#reviews .commentlist li { background: #fff; padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #f0f0f0; }
+#reviews .commentlist li img.avatar { float: right; border-radius: 50%; margin-left: 15px; width: 50px; }
+
+/* =========================================
+   04. محصولات مرتبط
+========================================= */
+.woocommerce .related.products { width: 100% !important; margin-top: 80px !important; clear: both !important; }
+.woocommerce .related.products > h2 { font-size: 22px !important; font-weight: 800 !important; margin-bottom: 25px !important; color: #222 !important; }
+
+.woocommerce ul.products::before, .woocommerce ul.products::after { display: none !important; }
+.woocommerce ul.products { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; margin: 0 !important; padding: 0 !important; }
+
+/* حل باگ کلاس last */
+.woocommerce ul.products li.product { 
+    width: 100% !important; margin: 0 !important; clear: none !important; float: none !important;
+    text-align: center !important; list-style: none !important; background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); transition: 0.3s;
+}
+.woocommerce ul.products li.product:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+.woocommerce ul.products li.product img { border-radius: 15px; margin-bottom: 15px; width: 100% !important; height: auto !important; }
+.woocommerce ul.products li.product .woocommerce-loop-product__title { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #333; }
+.woocommerce ul.products li.product .price { color: var(--primary-color); font-weight: 800; font-size: 16px; }
+.woocommerce ul.products li.product .button { display: none !important; }
+
+/* =========================================================
+   05. RESPONSIVE (موبایل و تبلت)
+========================================================= */
+@media (max-width: 992px) {
+    .woocommerce div.product { gap: 30px !important; }
+    .woocommerce div.product div.images, .woocommerce div.product div.summary { width: 100% !important; }
+    .woocommerce div.product div.images { position: static !important; }
+    .woocommerce ul.products { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+@media (max-width: 767px) {
+    .woocommerce .woocommerce-breadcrumb { margin: 80px auto 20px !important; width: 92% !important; font-size: 11px !important; }
+    .woocommerce div.product { width: 92% !important; margin: 0 auto 60px !important; }
+    .woocommerce div.product div.summary { padding: 25px 20px !important; }
+    .woocommerce div.product .product_title { font-size: 22px !important; }
+    .woocommerce div.product p.price { font-size: 20px !important; }
+    .woocommerce div.product form.cart { gap: 10px !important; }
+    .woocommerce div.product form.cart input.qty { width: 55px !important; height: 50px !important; font-size: 16px !important; }
+    .woocommerce div.product form.cart .button { height: 50px !important; font-size: 14px !important; }
+    
+    .woocommerce div.product .woocommerce-tabs ul.tabs { flex-wrap: nowrap !important; overflow-x: auto !important; gap: 20px !important; -ms-overflow-style: none; scrollbar-width: none; }
+    .woocommerce div.product .woocommerce-tabs ul.tabs::-webkit-scrollbar { display: none; }
+    .woocommerce div.product .woocommerce-tabs ul.tabs li a { font-size: 15px !important; white-space: nowrap !important; }
+
+    .woocommerce .related.products > h2 { font-size: 18px !important; }
+    .woocommerce ul.products { display: flex !important; flex-wrap: nowrap !important; overflow-x: auto !important; scroll-snap-type: x mandatory !important; gap: 15px !important; padding-bottom: 20px !important; -ms-overflow-style: none; scrollbar-width: none; }
+    .woocommerce ul.products::-webkit-scrollbar { display: none; }
+    .woocommerce ul.products li.product { flex: 0 0 55% !important; scroll-snap-align: start !important; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+/* =========================================================
+   01. ROOT & GLOBALS
+========================================================= */
+:root {
+    --primary-color: #4A3C4D;
+    --secondary-color: #D2B4DE;
+    --bg-color: #FBFBFB;
+    --text-color: #333333;
+    --container-width: min(1400px, 94%);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+@media (min-width: 993px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    body {
+        padding-bottom: 90px;
+    }
+}
+
+/* =========================================================
+   03. HEADER 
+========================================================= */
+.luxury-desktop-header {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 0 5%;
+    pointer-events: none;
+    direction: rtl;
+    width: 100%;
+}
+
+.luxury-header-inner {
+    pointer-events: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--container-width);
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 10px 35px rgba(74, 60, 77, 0.08);
+}
+
+.header-brand .brand-text {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.header-nav-center ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.header-nav-center a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.header-nav-center>ul>li>a:hover {
+    color: var(--primary-color);
+    background: rgba(210, 180, 222, 0.15);
+}
+
+.header-icons-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.luxury-icon-btn {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 0.3s;
+}
+
+.luxury-icon-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(74, 60, 77, 0.3);
+}
+
+/* =========================================================
+   17. WOOCOMMERCE SINGLE PRODUCT (طراحی اصولی و دیجی‌کالا)
+========================================================= */
+
+/* مخفی کردن سایدبارهای مزاحم قالب */
+.single-product #secondary,
+.single-product .widget-area,
+.single-product .sidebar {
+    display: none !important;
+}
+
+/* -----------------------------------------
+   کانتینر اصلی و مسیر راهنما (Breadcrumb)
+----------------------------------------- */
+.woocommerce div.product {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: var(--container-width) !important;
+    margin: 140px auto 80px !important;
+    direction: rtl !important;
+}
+
+.woocommerce .woocommerce-breadcrumb {
+    width: 100% !important;
+    margin: 0 0 30px !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+    padding: 12px 20px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    color: #888 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.woocommerce .woocommerce-breadcrumb a {
+    color: #555 !important;
+    text-decoration: none !important;
+    font-weight: 800 !important;
+}
+
+.woocommerce .woocommerce-breadcrumb a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* -----------------------------------------
+   ستون راست: گالری عکس (ساختار کاملاً امن و ضد قطاری شدن)
+----------------------------------------- */
+.woocommerce div.product div.images {
+    width: 42% !important;
+    float: none !important;
+    margin: 0 !important;
+    position: sticky !important;
+    top: 100px !important;
+}
+
+/* لغو کامل استایل‌های مخرب پیش‌فرض ووکامرس */
+.woocommerce div.product div.images .woocommerce-product-gallery__wrapper {
+    display: block !important;
+    transform: none !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* عکس اصلی بزرگ بالای صفحه */
+.woocommerce div.product div.images .woocommerce-product-gallery__image {
+    width: 100% !important;
+    float: none !important;
+    margin-bottom: 15px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: 1px solid #f0f0f0 !important;
+    background: #fff !important;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 20px !important;
+}
+
+/* پنهان کردن عکس‌های تکراری در گالری اصلی که باعث قطاری شدن می‌شدند */
+.woocommerce div.product div.images .woocommerce-product-gallery__image:not(:first-child) {
+    display: none !important;
+}
+
+/* عکس‌های کوچک پایین گالری (Thumbnails) به صورت افقی و کاملاً منظم */
+.woocommerce div.product div.images .flex-control-thumbs {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    padding: 5px 0 !important;
+    list-style: none !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs::-webkit-scrollbar {
+    display: none;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li {
+    width: 75px !important;
+    flex: 0 0 75px !important;
+    height: 75px !important;
+    float: none !important;
+    list-style: none !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 2px solid transparent !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+    background: #fff !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 0.6 !important;
+    transition: 0.3s !important;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li img.flex-active,
+.woocommerce div.product div.images .flex-control-thumbs li:hover img {
+    opacity: 1 !important;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li.flex-active-slide,
+.woocommerce div.product div.images .flex-control-thumbs li:hover {
+    border-color: var(--primary-color) !important;
+}
+
+/* بج حراج */
+.woocommerce div.product span.onsale {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    background: #E74C3C !important;
+    color: #fff !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    padding: 5px 15px !important;
+    border-radius: 20px !important;
+    z-index: 99 !important;
+}
+
+/* -----------------------------------------
+   ستون چپ: اطلاعات و دکمه خرید
+----------------------------------------- */
+.woocommerce div.product div.summary {
+    width: 54% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 35px !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+    border-radius: 24px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02) !important;
+}
+
+.woocommerce div.product .product_title {
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    color: #222 !important;
+    margin: 0 0 15px !important;
+}
+
+.woocommerce div.product p.price {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: var(--primary-color) !important;
+    margin-bottom: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+.woocommerce div.product p.price del {
+    font-size: 16px !important;
+    color: #aaa !important;
+    font-weight: normal !important;
+}
+
+.woocommerce div.product .woocommerce-product-details__short-description {
+    font-size: 14px !important;
+    line-height: 1.9 !important;
+    color: #555 !important;
+    margin-bottom: 30px !important;
+    padding-bottom: 20px !important;
+    border-bottom: 1px solid #eaeaea !important;
+}
+
+/* دکمه خرید و فیلد تعداد */
+.woocommerce div.product form.cart {
+    display: flex !important;
+    gap: 15px !important;
+    margin-bottom: 20px !important;
+    align-items: stretch !important;
+}
+
+.woocommerce div.product form.cart div.quantity {
+    float: none !important;
+    margin: 0 !important;
+}
+
+.woocommerce div.product form.cart input.qty {
+    width: 70px !important;
+    height: 55px !important;
+    border-radius: 12px !important;
+    border: 1px solid #ddd !important;
+    text-align: center !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+.woocommerce div.product form.cart .button {
+    flex: 1 !important;
+    height: 55px !important;
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    transition: 0.3s !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.woocommerce div.product form.cart .button:hover {
+    background: #362c38 !important;
+}
+
+/* -----------------------------------------
+   تب‌ها (توضیحات و نظرات)
+----------------------------------------- */
+.woocommerce div.product .woocommerce-tabs {
+    width: 100% !important;
+    margin-top: 50px !important;
+    clear: both !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    display: flex !important;
+    gap: 30px !important;
+    border-bottom: 2px solid #eaeaea !important;
+    padding: 0 !important;
+    margin: 0 0 30px !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 0 15px !important;
+    margin: 0 0 -2px !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li::before,
+.woocommerce div.product .woocommerce-tabs ul.tabs li::after {
+    display: none !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    color: #888 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    padding: 0 !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+    border-bottom: 3px solid var(--primary-color) !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    color: var(--primary-color) !important;
+}
+
+.woocommerce div.product .woocommerce-tabs .panel {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #555;
+}
+
+/* -----------------------------------------
+   استایل نظرات و ستاره‌های طلایی
+----------------------------------------- */
+.woocommerce p.stars a {
+    position: relative;
+    display: inline-block;
+    text-indent: -9999px;
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+.woocommerce p.stars a::before {
+    content: "★";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 28px;
+    text-align: center;
+    color: #ccc;
+    text-indent: 0;
+}
+
+.woocommerce p.stars a:hover~a::before {
+    color: #ccc !important;
+}
+
+.woocommerce p.stars:hover a::before,
+.woocommerce p.stars.selected a:not(.active)::before,
+.woocommerce p.stars.selected a.active::before {
+    color: #FFB900;
+}
+
+.woocommerce p.stars.selected a.active~a::before {
+    color: #ccc;
+}
+
+#review_form_wrapper {
+    background: #FAF6FA;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+    border: 1px solid #eee;
+}
+
+#review_form_wrapper label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+#review_form_wrapper input[type="text"],
+#review_form_wrapper input[type="email"],
+#review_form_wrapper textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-family: inherit;
+}
+
+#review_form_wrapper .submit {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#review_form_wrapper .submit:hover {
+    background: #362c38;
+}
+
+#reviews h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+#reviews .commentlist {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#reviews .commentlist li {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+#reviews .commentlist li img.avatar {
+    float: right;
+    border-radius: 50%;
+    margin-left: 15px;
+    width: 50px;
+}
+
+/* -----------------------------------------
+   محصولات مرتبط
+----------------------------------------- */
+.woocommerce .related.products {
+    width: 100% !important;
+    margin-top: 70px !important;
+    clear: both !important;
+}
+
+.woocommerce .related.products>h2 {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    margin-bottom: 25px !important;
+    color: #222;
+}
+
+.woocommerce ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.woocommerce ul.products li.product {
+    text-align: center;
+    list-style: none !important;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+    transition: 0.3s;
+}
+
+.woocommerce ul.products li.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.woocommerce ul.products li.product img {
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.woocommerce ul.products li.product .price {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.woocommerce ul.products li.product .button {
+    display: none !important;
+}
+
+/* =========================================================
+   08. RESPONSIVE (موبایل و تبلت)
+========================================= */
+@media (max-width: 992px) {
+    .woocommerce div.product {
+        gap: 30px !important;
+        margin-top: 100px !important;
+    }
+
+    .woocommerce div.product div.images,
+    .woocommerce div.product div.summary {
+        width: 100% !important;
+    }
+
+    .woocommerce div.product div.images {
+        position: static !important;
+    }
+
+    .woocommerce ul.products {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .woocommerce .woocommerce-breadcrumb {
+        margin: 80px auto 20px !important;
+        width: 92% !important;
+        font-size: 11px !important;
+    }
+
+    .woocommerce div.product {
+        width: 92% !important;
+        margin: 0 auto 60px !important;
+    }
+
+    .woocommerce div.product div.summary {
+        padding: 25px 20px !important;
+    }
+
+    .woocommerce div.product .product_title {
+        font-size: 22px !important;
+    }
+
+    .woocommerce div.product p.price {
+        font-size: 22px !important;
+    }
+
+    .woocommerce div.product form.cart {
+        gap: 10px !important;
+    }
+
+    .woocommerce div.product form.cart input.qty {
+        width: 55px !important;
+        height: 50px !important;
+        font-size: 16px !important;
+    }
+
+    .woocommerce div.product form.cart .button {
+        height: 50px !important;
+        font-size: 14px !important;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 20px !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs li a {
+        font-size: 15px !important;
+        white-space: nowrap !important;
+    }
+
+    .woocommerce .related.products>h2 {
+        font-size: 18px !important;
+    }
+
+    .woocommerce ul.products {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 15px !important;
+        padding-bottom: 20px !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .woocommerce ul.products::-webkit-scrollbar {
+        display: none;
+    }
+
+    .woocommerce ul.products li.product {
+        flex: 0 0 55% !important;
+        scroll-snap-align: start !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
