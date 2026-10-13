@@ -34,70 +34,6 @@ function ns_remove_all_sidebars() {
 }
 
 /* =====================================================
-   ترجمه‌های قطعی و بومی ووکامرس (رفع مشکل دوتا شدن)
-===================================================== */
-add_filter( 'woocommerce_breadcrumb_defaults', 'ns_change_breadcrumb_home_text' );
-function ns_change_breadcrumb_home_text( $defaults ) {
-    $defaults['home'] = 'خانه';
-    return $defaults;
-}
-
-// 1. ترجمه متن‌های ساده
-add_filter( 'gettext', 'ns_force_persian_translations', 999, 3 );
-function ns_force_persian_translations( $translated, $text, $domain ) {
-    if ( 'woocommerce' === $domain || 'default' === $domain ) {
-        $exact_translations = array(
-            'Add to cart' => 'افزودن به سبد خرید',
-            'View cart' => 'مشاهده سبد خرید',
-            'Sale!' => 'حراج',
-            'Description' => 'توضیحات محصول',
-            'Related products' => 'محصولات مرتبط',
-            'Category:' => 'دسته‌بندی:',
-            'Category' => 'دسته‌بندی',
-            'Categories:' => 'دسته‌بندی‌ها:',
-            'Default sorting' => 'مرتب‌سازی پیش‌فرض',
-            'Sort by popularity' => 'محبوب‌ترین‌ها',
-            'Sort by average rating' => 'بالاترین امتیاز',
-            'Sort by latest' => 'جدیدترین‌ها',
-            'Sort by price: low to high' => 'ارزان‌ترین',
-            'Sort by price: high to low' => 'گران‌ترین',
-            'Showing the single result' => 'نمایش یک محصول',
-            // ترجمه‌های جدید سبد خرید و تسویه حساب
-            'Product' => 'محصول',
-            'Price' => 'قیمت',
-            'Quantity' => 'تعداد',
-            'Subtotal' => 'جمع جزء',
-            'Total' => 'مبلغ کل',
-            'Cart totals' => 'فاکتور شما',
-            'Update cart' => 'بروزرسانی سبد',
-            'Apply coupon' => 'اعمال کد تخفیف',
-            'Coupon code' => 'کد تخفیف',
-            'Proceed to checkout' => 'ثبت سفارش و پرداخت',
-            'Please enter a coupon code.' => 'لطفاً کد تخفیف را وارد کنید.',
-            'Remove this item' => 'حذف محصول'
-        );
-        $trimmed_text = trim($text);
-        if ( array_key_exists( $trimmed_text, $exact_translations ) ) { return $exact_translations[$trimmed_text]; }
-        $translated = str_ireplace( 'Be the first to review', 'اولین نفری باشید که دیدگاه خود را ثبت می‌کنید', $translated );
-    }
-    return $translated;
-}
-
-// 2. ترجمه متن‌های جمع و متغیر (رفع مشکل متن لجباز محصولات)
-add_filter( 'ngettext', 'ns_force_persian_translations_plural', 999, 5 );
-function ns_force_persian_translations_plural( $translation, $single, $plural, $number, $domain ) {
-    if ( 'woocommerce' === $domain || 'default' === $domain ) {
-        if ( strpos( $plural, 'Showing all %d results' ) !== false || strpos( $single, 'Showing all %d results' ) !== false ) {
-            return 'نمایش همه %d محصول';
-        }
-        if ( strpos( $plural, 'of %3$d results' ) !== false || strpos( $single, 'of %3$d results' ) !== false ) {
-            return 'نمایش %1$d تا %2$d از مجموع %3$d محصول';
-        }
-    }
-    return ns_force_persian_translations( $translation, $single, $domain );
-}
-
-/* =====================================================
    نمایش فیلترهای فعال (بالای محصولات)
 ===================================================== */
 add_action('woocommerce_before_shop_loop', 'ns_show_active_filters_top', 15);
@@ -265,17 +201,6 @@ function ns_shop_toolbar_and_mobile_menu_script() {
                 $('.ns-offcanvas-filter, .ns-filter-overlay').removeClass('active');
                 $('body').css('overflow', 'auto');
             });
-            
-            // پشتیبان جاوااسکریپتی برای رفع خطای احتمالی لود قالب (ترجمه مضاعف)
-            $('.woocommerce-result-count').each(function() {
-                var txt = $(this).text();
-                if(txt.match(/Showing/i)) {
-                    txt = txt.replace(/Showing all (\d+) results/gi, 'نمایش همه $1 محصول')
-                             .replace(/Showing (\d+)[–\-]+(\d+) of (\d+) results/gi, 'نمایش $1 تا $2 از مجموع $3 محصول')
-                             .replace(/Showing the single result/gi, 'نمایش تنها محصول موجود');
-                    $(this).text(txt);
-                }
-            });
         }
     });
     </script>
@@ -340,23 +265,98 @@ function ns_shop_toolbar_and_mobile_menu_script() {
 
 /* =====================================================
    بهینه‌سازی و تمیزکاری صفحه تسویه حساب (Checkout)
+   ترتیب فیلدها: نام، نام خانوادگی، (کشور)، استان، شهر، خیابان، کد پستی، تلفن
 ===================================================== */
-add_filter( 'woocommerce_checkout_fields' , 'ns_custom_override_checkout_fields' );
+add_filter( 'woocommerce_checkout_fields' , 'ns_custom_override_checkout_fields', 9999 );
 function ns_custom_override_checkout_fields( $fields ) {
-    // حذف فیلدهای اضافی و خسته‌کننده
-    unset($fields['billing']['billing_company']); // نام شرکت
+    // حذف فیلدهای اضافی
+    unset($fields['billing']['billing_company']);   // نام شرکت
     unset($fields['billing']['billing_address_2']); // آدرس دوم
-    
-    // تغییر کلاس‌ها برای چیدمان بهتر (مثلا نام و نام خانوادگی در یک خط)
-    $fields['billing']['billing_first_name']['class'] = array('form-row-first');
-    $fields['billing']['billing_last_name']['class'] = array('form-row-last');
-    $fields['billing']['billing_phone']['class'] = array('form-row-first');
-    $fields['billing']['billing_email']['class'] = array('form-row-last');
-    
-    // تغییر placeholder ها
+    unset($fields['billing']['billing_email']);     // ایمیل
+
+    // نام و نام خانوادگی
+    $fields['billing']['billing_first_name']['class']    = array('form-row-first');
+    $fields['billing']['billing_first_name']['priority'] = 10;
+    $fields['billing']['billing_last_name']['class']     = array('form-row-last');
+    $fields['billing']['billing_last_name']['priority']  = 20;
+
+    // کشور (اگر فقط یک کشور فعال باشد ووکامرس خودش مخفی‌اش می‌کند)
+    if ( isset($fields['billing']['billing_country']) ) {
+        $fields['billing']['billing_country']['priority'] = 30;
+    }
+
+    // ۱. استان
+    $fields['billing']['billing_state']['label']    = 'استان';
+    $fields['billing']['billing_state']['required'] = true;
+    $fields['billing']['billing_state']['class']    = array('form-row-first');
+    $fields['billing']['billing_state']['priority'] = 40;
+
+    // ۲. شهر
+    $fields['billing']['billing_city']['label']    = 'شهر';
+    $fields['billing']['billing_city']['required'] = true;
+    $fields['billing']['billing_city']['class']    = array('form-row-last');
+    $fields['billing']['billing_city']['priority'] = 50;
+
+    // ۳. خیابان (آدرس)
+    $fields['billing']['billing_address_1']['label']       = 'خیابان و آدرس دقیق';
+    $fields['billing']['billing_address_1']['placeholder'] = 'خیابان، کوچه، پلاک، واحد';
+    $fields['billing']['billing_address_1']['required']    = true;
+    $fields['billing']['billing_address_1']['class']       = array('form-row-wide');
+    $fields['billing']['billing_address_1']['priority']    = 60;
+
+    // ۴. کد پستی
+    $fields['billing']['billing_postcode']['label']    = 'کد پستی';
+    $fields['billing']['billing_postcode']['required'] = true;
+    $fields['billing']['billing_postcode']['class']    = array('form-row-first');
+    $fields['billing']['billing_postcode']['priority'] = 70;
+
+    // ۵. شماره تلفن (اجباری)
+    $fields['billing']['billing_phone']['label']    = 'شماره تلفن';
+    $fields['billing']['billing_phone']['required'] = true;
+    $fields['billing']['billing_phone']['class']    = array('form-row-last');
+    $fields['billing']['billing_phone']['priority'] = 80;
+
+    // توضیحات سفارش
     $fields['order']['order_comments']['placeholder'] = 'اگر یادداشتی برای تحویل کالا دارید اینجا بنویسید...';
     
     return $fields;
+}
+
+// فیلدهای آدرس پیش‌فرض ووکامرس (برای اطمینان از ترتیب و اجباری بودن)
+add_filter( 'woocommerce_default_address_fields', 'ns_custom_default_address_fields' );
+function ns_custom_default_address_fields( $fields ) {
+    $fields['state']['priority']     = 40;
+    $fields['city']['priority']      = 50;
+    $fields['address_1']['priority'] = 60;
+    $fields['postcode']['priority']  = 70;
+    return $fields;
+}
+
+// حذف عبارت «اختیاری» از فیلد تلفن و نمایش ستاره اجباری
+add_filter( 'woocommerce_form_field', 'ns_fix_phone_field_label', 9999, 4 );
+function ns_fix_phone_field_label( $field, $key, $args, $value ) {
+    if ( $key === 'billing_phone' ) {
+        // حذف متن اختیاری (فارسی یا انگلیسی)
+        $field = preg_replace( '/<span class="optional">.*?<\/span>/su', '', $field );
+        // اضافه کردن ستاره اجباری اگر وجود نداشت
+        if ( strpos( $field, 'class="required"' ) === false ) {
+            $field = preg_replace(
+                '/(<label[^>]*>.*?)(<\/label>)/su',
+                '$1 <abbr class="required" title="ضروری">*</abbr>$2',
+                $field,
+                1
+            );
+        }
+    }
+    return $field;
+}
+
+// اعتبارسنجی سمت سرور: شماره تلفن حتماً باید پر شود
+add_action( 'woocommerce_checkout_process', 'ns_validate_required_phone' );
+function ns_validate_required_phone() {
+    if ( empty( trim( $_POST['billing_phone'] ?? '' ) ) ) {
+        wc_add_notice( 'وارد کردن شماره تلفن الزامی است.', 'error' );
+    }
 }
 
 // تغییر متن دکمه ثبت سفارش
