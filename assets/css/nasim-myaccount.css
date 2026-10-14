@@ -1,0 +1,1098 @@
+/**
+ * Nasim Style - Custom WooCommerce My Account Stylesheet (v2.1 - Theme Header/Footer Safe)
+ * Visual Identity: Jasmine Flower, Soft Lilac & In-Page Mobile App Navigation
+ */
+
+.ns-acc-wrapper {
+    /* پالت رنگی اختصاصی نسیم استایل */
+    --ns-lilac-light: #E6D5F2;
+    --ns-lilac-soft: #D8B4E2;
+    --ns-lilac-purple: #B68BC9;
+    --ns-purple-dark: #735080;
+    --ns-white: #FFFFFF;
+    --ns-bg-soft: #FCF9FE;
+    --ns-text-main: #302638;
+    --ns-text-muted: #82758A;
+    --ns-border-color: #EFE6F7;
+
+    /* رنگ‌های وضعیت */
+    --ns-success-bg: #EDF7F2;
+    --ns-success-text: #2D6A4F;
+    --ns-warning-bg: #FEF6E7;
+    --ns-warning-text: #9C6515;
+    --ns-danger-bg: #FDEEEF;
+    --ns-danger-text: #A43540;
+
+    /* ابعاد و سایه‌ها */
+    --ns-radius-xl: 24px;
+    --ns-radius-lg: 18px;
+    --ns-radius-md: 14px;
+    --ns-radius-sm: 10px;
+    --ns-shadow-soft: 0 10px 30px -5px rgba(115, 80, 128, 0.06), 0 4px 12px -2px rgba(182, 139, 201, 0.04);
+    --ns-shadow-hover: 0 14px 35px -5px rgba(115, 80, 128, 0.12);
+    --ns-transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background-color: var(--ns-bg-soft);
+    color: var(--ns-text-main);
+    direction: rtl;
+    text-align: right;
+    max-width: 1280px;
+    width: 100%;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    border-radius: var(--ns-radius-xl);
+    box-sizing: border-box;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1; /* جلوگیری از افتادن روی منوهای بازشونده قالب اصلی */
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ns-acc-wrapper::before,
+.ns-acc-wrapper::after,
+.ns-acc-layout::before,
+.ns-acc-layout::after {
+    display: none !important;
+}
+
+.ns-acc-wrapper *,
+.ns-acc-wrapper *::before,
+.ns-acc-wrapper *::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   ۱. سربرگ پروفایل (Header & Jasmine Motif)
+   ========================================================================== */
+.ns-acc-header {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--ns-white) 0%, #F9F2FD 55%, var(--ns-lilac-light) 100%);
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-xl);
+    padding: 1.85rem 2.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--ns-shadow-soft);
+}
+
+.ns-acc-header__jasmine-bg {
+    position: absolute;
+    left: -25px;
+    bottom: -40px;
+    width: 220px;
+    height: 220px;
+    color: var(--ns-lilac-purple);
+    pointer-events: none;
+    opacity: 0.5;
+    transform: rotate(-15deg);
+}
+
+.ns-acc-jasmine-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ns-acc-header__top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 2;
+}
+
+.ns-acc-header__badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--ns-purple-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--ns-lilac-light);
+}
+
+.ns-acc-header__profile {
+    display: flex;
+    align-items: center;
+    gap: 1.35rem;
+    position: relative;
+    z-index: 2;
+}
+
+.ns-acc-header__avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.ns-acc-header__avatar {
+    width: 84px !important;
+    height: 84px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+    border: 3px solid var(--ns-white) !important;
+    box-shadow: 0 6px 18px rgba(115, 80, 128, 0.16);
+    background-color: var(--ns-lilac-light);
+    display: block;
+}
+
+.ns-acc-header__status-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    background-color: #40916C;
+    border: 2px solid var(--ns-white);
+    border-radius: 50%;
+}
+
+.ns-acc-header__title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ns-acc-mobile-edit-icon {
+    display: none;
+}
+
+.ns-acc-header__name {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    color: var(--ns-text-main) !important;
+    margin: 0 0 0.25rem 0 !important;
+    line-height: 1.4;
+}
+
+.ns-acc-header__welcome-sub {
+    font-size: 0.9rem;
+    color: var(--ns-text-muted);
+    margin: 0 0 0.9rem 0;
+}
+
+.ns-acc-header__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.ns-acc-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--ns-border-color);
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--ns-radius-sm);
+    font-size: 0.84rem;
+    color: var(--ns-text-muted);
+}
+
+.ns-acc-meta-pill svg {
+    width: 16px;
+    height: 16px;
+    color: var(--ns-lilac-purple);
+    flex-shrink: 0;
+}
+
+.ns-acc-meta-pill strong {
+    color: var(--ns-text-main);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   ۲. چیدمان دسکتاپ (Sidebar + Content)
+   ========================================================================== */
+.ns-acc-layout {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.ns-acc-sidebar {
+    background-color: var(--ns-white);
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-lg);
+    padding: 0.9rem;
+    box-shadow: var(--ns-shadow-soft);
+    width: 100% !important;
+    float: none !important;
+}
+
+.ns-acc-main-content {
+    width: 100% !important;
+    float: none !important;
+    min-width: 0;
+}
+
+.ns-acc-nav__list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.ns-acc-nav__item {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.ns-acc-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--ns-radius-md);
+    color: var(--ns-text-main) !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 0.94rem;
+    transition: var(--ns-transition);
+}
+
+.ns-acc-nav__icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    color: var(--ns-text-muted);
+    transition: var(--ns-transition);
+    flex-shrink: 0;
+}
+
+.ns-acc-nav__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ns-acc-nav__link:hover {
+    background-color: var(--ns-bg-soft);
+    color: var(--ns-purple-dark) !important;
+}
+
+.ns-acc-nav__link:hover .ns-acc-nav__icon {
+    color: var(--ns-lilac-purple);
+}
+
+.ns-acc-nav__item--active .ns-acc-nav__link {
+    background: linear-gradient(135deg, var(--ns-lilac-light) 0%, #F3E9FA 100%);
+    color: var(--ns-purple-dark) !important;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(182, 139, 201, 0.2);
+}
+
+.ns-acc-nav__item--active .ns-acc-nav__icon {
+    color: var(--ns-purple-dark);
+}
+
+.ns-acc-nav__item--logout {
+    margin-top: 0.5rem !important;
+    padding-top: 0.5rem !important;
+    border-top: 1px dashed var(--ns-border-color) !important;
+}
+
+.ns-acc-nav__item--logout .ns-acc-nav__link,
+.ns-acc-nav__item--logout .ns-acc-nav__icon {
+    color: var(--ns-danger-text) !important;
+}
+
+.ns-acc-content-card {
+    background-color: var(--ns-white);
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--ns-shadow-soft);
+}
+
+/* ==========================================================================
+   ۳. پیشخوان و کارت‌های اطلاعاتی
+   ========================================================================== */
+.ns-acc-welcome-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: linear-gradient(120deg, var(--ns-bg-soft) 0%, #F6ECFC 100%);
+    border: 1px solid var(--ns-lilac-light);
+    border-radius: var(--ns-radius-lg);
+    padding: 1.35rem 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.ns-acc-welcome-banner__decor {
+    width: 60px;
+    height: 60px;
+    color: var(--ns-lilac-purple);
+    flex-shrink: 0;
+}
+
+.ns-acc-section-title {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: var(--ns-text-main) !important;
+    margin: 0 0 0.3rem 0 !important;
+}
+
+.ns-acc-section-desc {
+    font-size: 0.88rem;
+    color: var(--ns-text-muted);
+    margin: 0;
+}
+
+.ns-acc-subtitle {
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    color: var(--ns-text-main) !important;
+    margin: 0 0 0.9rem 0 !important;
+}
+
+.ns-acc-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.ns-acc-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    background-color: var(--ns-white);
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-md);
+    padding: 1.15rem;
+    transition: var(--ns-transition);
+}
+
+.ns-acc-stat-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ns-acc-stat-card__icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.ns-acc-stat-card__icon--total {
+    background-color: var(--ns-lilac-light);
+    color: var(--ns-purple-dark);
+}
+
+.ns-acc-stat-card__icon--active {
+    background-color: var(--ns-warning-bg);
+    color: var(--ns-warning-text);
+}
+
+.ns-acc-stat-card__icon--completed {
+    background-color: var(--ns-success-bg);
+    color: var(--ns-success-text);
+}
+
+.ns-acc-stat-card__body {
+    display: flex;
+    flex-direction: column;
+}
+
+.ns-acc-stat-card__value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--ns-text-main);
+}
+
+.ns-acc-stat-card__label {
+    font-size: 0.8rem;
+    color: var(--ns-text-muted);
+}
+
+/* دسترسی سریع */
+.ns-acc-quick-links {
+    margin-bottom: 2rem;
+}
+
+.ns-acc-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+}
+
+.ns-acc-quick-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem;
+    background-color: var(--ns-bg-soft);
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-md);
+    text-decoration: none !important;
+    transition: var(--ns-transition);
+}
+
+.ns-acc-quick-card:active {
+    transform: scale(0.98);
+}
+
+.ns-acc-quick-card__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background-color: var(--ns-white);
+    color: var(--ns-purple-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ns-lilac-light);
+    flex-shrink: 0;
+}
+
+.ns-acc-quick-card__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ns-acc-quick-card__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ns-acc-quick-card__info strong {
+    font-size: 0.9rem;
+    color: var(--ns-text-main);
+}
+
+.ns-acc-quick-card__info span {
+    font-size: 0.76rem;
+    color: var(--ns-text-muted);
+}
+
+/* ==========================================================================
+   ۴. سفارش‌ها و وضعیت‌ها
+   ========================================================================== */
+.ns-acc-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.ns-acc-link-more {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--ns-purple-dark) !important;
+    text-decoration: none !important;
+}
+
+.ns-acc-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.ns-acc-order-row-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-md);
+    background-color: var(--ns-white);
+}
+
+.ns-acc-order-number {
+    font-weight: 800;
+    color: var(--ns-text-main);
+    margin-left: 0.65rem;
+}
+
+.ns-acc-order-date {
+    font-size: 0.84rem;
+    color: var(--ns-text-muted);
+}
+
+.ns-acc-order-row-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.ns-acc-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.ns-acc-status--completed {
+    background-color: var(--ns-success-bg);
+    color: var(--ns-success-text);
+}
+
+.ns-acc-status--processing,
+.ns-acc-status--on-hold {
+    background-color: var(--ns-lilac-light);
+    color: var(--ns-purple-dark);
+}
+
+.ns-acc-status--pending {
+    background-color: var(--ns-warning-bg);
+    color: var(--ns-warning-text);
+}
+
+.ns-acc-status--cancelled,
+.ns-acc-status--failed,
+.ns-acc-status--refunded {
+    background-color: var(--ns-danger-bg);
+    color: var(--ns-danger-text);
+}
+
+.ns-acc-orders-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-md);
+    overflow: hidden;
+}
+
+.ns-acc-orders-table th {
+    background-color: var(--ns-bg-soft);
+    color: var(--ns-text-muted);
+    font-weight: 700;
+    font-size: 0.84rem;
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid var(--ns-border-color);
+    text-align: right;
+}
+
+.ns-acc-orders-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--ns-border-color);
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   ۵. فرم‌ها و ورودی‌های لمسی استاندارد (iOS Zoom-Safe 16px)
+   ========================================================================== */
+.ns-acc-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.15rem;
+    margin-bottom: 1.25rem;
+}
+
+.ns-acc-form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.ns-acc-form__group--full {
+    grid-column: 1 / -1;
+}
+
+.ns-acc-form__group label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ns-text-main);
+}
+
+.ns-acc-required {
+    color: var(--ns-lilac-purple);
+}
+
+.ns-acc-input-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ns-acc-input-icon {
+    position: absolute;
+    right: 14px;
+    width: 20px;
+    height: 20px;
+    color: var(--ns-lilac-purple);
+    pointer-events: none;
+    display: flex;
+}
+
+.ns-acc-input--phone {
+    padding-right: 2.6rem !important;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.ns-acc-input,
+.ns-acc-wrapper input[type="text"],
+.ns-acc-wrapper input[type="tel"],
+.ns-acc-wrapper input[type="password"],
+.ns-acc-wrapper select,
+.ns-acc-wrapper textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-md);
+    background-color: var(--ns-bg-soft);
+    color: var(--ns-text-main);
+    font-family: inherit !important;
+    font-size: 16px !important;
+    transition: var(--ns-transition);
+    outline: none;
+    box-shadow: none;
+}
+
+.ns-acc-input--ltr {
+    text-align: left;
+}
+
+.ns-acc-input:focus,
+.ns-acc-wrapper input:focus,
+.ns-acc-wrapper select:focus,
+.ns-acc-wrapper textarea:focus {
+    background-color: var(--ns-white);
+    border-color: var(--ns-lilac-purple) !important;
+    box-shadow: 0 0 0 4px rgba(216, 180, 226, 0.25) !important;
+}
+
+.ns-acc-field-hint {
+    font-size: 0.78rem;
+    color: var(--ns-text-muted);
+}
+
+.ns-acc-fieldset {
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-lg);
+    padding: 1.35rem;
+    margin: 1.5rem 0;
+    background-color: var(--ns-bg-soft);
+}
+
+.ns-acc-fieldset__legend {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ns-purple-dark);
+    padding: 0 0.6rem;
+}
+
+/* دکمه‌ها */
+.ns-acc-btn,
+.ns-acc-wrapper .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--ns-radius-md);
+    font-family: inherit !important;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: var(--ns-transition);
+    border: 1.5px solid transparent;
+    user-select: none;
+}
+
+.ns-acc-btn:active {
+    transform: scale(0.98);
+}
+
+.ns-acc-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.ns-acc-btn--primary,
+.ns-acc-wrapper button[type="submit"].button {
+    background: linear-gradient(135deg, var(--ns-lilac-purple) 0%, var(--ns-purple-dark) 100%) !important;
+    color: var(--ns-white) !important;
+    box-shadow: 0 6px 16px rgba(115, 80, 128, 0.22);
+}
+
+.ns-acc-btn--outline {
+    background-color: var(--ns-white) !important;
+    color: var(--ns-purple-dark) !important;
+    border-color: var(--ns-lilac-soft) !important;
+}
+
+.ns-acc-btn--ghost {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--ns-purple-dark) !important;
+    border-color: var(--ns-border-color) !important;
+}
+
+/* آدرس‌ها */
+.ns-acc-addresses-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.ns-acc-address-card {
+    border: 1px solid var(--ns-border-color);
+    border-radius: var(--ns-radius-lg);
+    padding: 1.35rem;
+    background-color: var(--ns-bg-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ns-acc-address-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.85rem;
+    border-bottom: 1px solid var(--ns-border-color);
+}
+
+.ns-acc-address-card__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ns-acc-address-card__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--ns-purple-dark);
+}
+
+.ns-acc-address-card__title {
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+}
+
+.ns-acc-badge-default {
+    background-color: var(--ns-lilac-light);
+    color: var(--ns-purple-dark);
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+}
+
+.ns-acc-address-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: 1.25rem;
+}
+
+.ns-acc-address-detail {
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.ns-acc-address-detail__label {
+    color: var(--ns-text-muted);
+}
+
+.ns-acc-empty-state {
+    text-align: center;
+    padding: 2.5rem 1.25rem;
+    background-color: var(--ns-bg-soft);
+    border: 1px dashed var(--ns-lilac-soft);
+    border-radius: var(--ns-radius-lg);
+}
+
+.ns-acc-empty-state__icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 0.85rem;
+    color: var(--ns-lilac-purple);
+}
+
+/* ==========================================================================
+   ۶. تجربه اپلیکیشن موبایل درون‌صفحه‌ای (بدون تداخل با منوی پایین/بالای قالب)
+   ========================================================================== */
+@media (max-width: 991px) {
+    .ns-acc-wrapper {
+        margin: 0.5rem auto 1.5rem auto;
+        padding: 0.75rem;
+        border-radius: var(--ns-radius-lg);
+    }
+
+    .ns-acc-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* نوار ناوبری کپسولی داخل صفحه (Segmented App Bar) - بدون هیچ گونه تداخل با هدر و فوتر قالب */
+    .ns-acc-sidebar {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        z-index: 2;
+        background-color: var(--ns-white);
+        border: 1px solid var(--ns-border-color);
+        border-radius: var(--ns-radius-lg);
+        padding: 0.5rem;
+        box-shadow: var(--ns-shadow-soft);
+        overflow: hidden;
+    }
+
+    .ns-acc-nav__list {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* مخفی کردن اسکرول‌بار در فایرفاکس */
+        padding: 0.15rem !important;
+    }
+
+    .ns-acc-nav__list::-webkit-scrollbar {
+        display: none; /* مخفی کردن اسکرول‌بار در کروم و سافاری */
+    }
+
+    .ns-acc-nav__item {
+        flex: 0 0 auto;
+    }
+
+    .ns-acc-nav__item--logout {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        border-top: none !important;
+    }
+
+    .ns-acc-nav__link {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        padding: 0.65rem 1.1rem;
+        border-radius: 999px; /* فرم کپسولی مدرن اپلیکیشنی */
+        background-color: var(--ns-bg-soft);
+        border: 1px solid var(--ns-border-color);
+        font-size: 0.85rem;
+        font-weight: 700;
+        white-space: nowrap;
+        min-height: 44px;
+    }
+
+    .ns-acc-nav__icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* استایل متمایز برای تب فعال در موبایل */
+    .ns-acc-nav__item--active .ns-acc-nav__link {
+        background: linear-gradient(135deg, var(--ns-lilac-purple) 0%, var(--ns-purple-dark) 100%) !important;
+        color: var(--ns-white) !important;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(115, 80, 128, 0.25);
+    }
+
+    .ns-acc-nav__item--active .ns-acc-nav__icon {
+        color: var(--ns-white) !important;
+    }
+
+    .ns-acc-nav__item--logout .ns-acc-nav__link {
+        background-color: var(--ns-danger-bg);
+        border-color: rgba(164, 53, 64, 0.15);
+    }
+}
+
+@media (max-width: 767px) {
+    /* سربرگ کامپکت شبیه اپ‌های فروشگاهی در موبایل */
+    .ns-acc-header {
+        padding: 1.15rem;
+        border-radius: var(--ns-radius-lg);
+        margin-bottom: 0.85rem;
+    }
+
+    .ns-acc-header__top-bar {
+        margin-bottom: 0.85rem;
+    }
+
+    .ns-acc-header__edit-btn {
+        display: none;
+    }
+
+    .ns-acc-mobile-edit-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background-color: var(--ns-white);
+        color: var(--ns-purple-dark);
+        border: 1px solid var(--ns-lilac-light);
+    }
+
+    .ns-acc-mobile-edit-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ns-acc-header__profile {
+        flex-direction: row;
+        align-items: center;
+        text-align: right;
+        gap: 0.9rem;
+    }
+
+    .ns-acc-header__avatar {
+        width: 64px !important;
+        height: 64px !important;
+    }
+
+    .ns-acc-header__name {
+        font-size: 1.08rem !important;
+    }
+
+    .ns-acc-header__welcome-sub {
+        font-size: 0.78rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .ns-acc-meta-pill {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
+    }
+
+    /* کارت‌های آمار ۳ ستونه جمع‌وجور در موبایل */
+    .ns-acc-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .ns-acc-stat-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 0.85rem 0.35rem;
+        gap: 0.4rem;
+    }
+
+    .ns-acc-stat-card__icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    .ns-acc-stat-card__icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ns-acc-stat-card__value {
+        font-size: 0.92rem;
+    }
+
+    .ns-acc-stat-card__label {
+        font-size: 0.68rem;
+        line-height: 1.3;
+    }
+
+    .ns-acc-quick-grid,
+    .ns-acc-form__grid,
+    .ns-acc-addresses-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ns-acc-content-card {
+        padding: 1.15rem 1rem;
+        border-radius: var(--ns-radius-lg);
+    }
+
+    .ns-acc-welcome-banner {
+        padding: 1.1rem;
+    }
+
+    .ns-acc-welcome-banner__decor {
+        width: 44px;
+        height: 44px;
+    }
+
+    /* تبدیل جدول سفارش‌ها به کارت‌های لمسی در موبایل */
+    .ns-acc-orders-table,
+    .ns-acc-orders-table tbody,
+    .ns-acc-orders-table tr,
+    .ns-acc-orders-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .ns-acc-orders-table thead {
+        display: none;
+    }
+
+    .ns-acc-orders-table {
+        border: none;
+    }
+
+    .ns-acc-orders-table tr.ns-acc-order-tr {
+        background-color: var(--ns-bg-soft);
+        border: 1px solid var(--ns-border-color);
+        border-radius: var(--ns-radius-md);
+        padding: 0.9rem 1rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .ns-acc-orders-table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.55rem 0;
+        border-bottom: 1px dashed var(--ns-border-color);
+        text-align: left;
+    }
+
+    .ns-acc-orders-table td::before {
+        content: attr(data-title);
+        font-weight: 700;
+        color: var(--ns-text-muted);
+        font-size: 0.82rem;
+        text-align: right;
+    }
+
+    .ns-acc-orders-table td.ns-acc-td-actions {
+        border-bottom: none;
+        padding-top: 0.85rem;
+    }
+
+    .ns-acc-orders-table td.ns-acc-td-actions::before {
+        display: none;
+    }
+
+    .ns-acc-actions-group,
+    .ns-acc-actions-group .ns-acc-btn,
+    .ns-acc-btn--block-mobile,
+    .ns-acc-order-row-card__action,
+    .ns-acc-order-row-card__action .ns-acc-btn {
+        width: 100%;
+    }
+}

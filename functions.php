@@ -364,3 +364,226 @@ add_filter( 'woocommerce_order_button_text', 'ns_custom_button_text' );
 function ns_custom_button_text() {
     return 'تکمیل و پرداخت نهایی'; 
 }
+
+
+
+
+
+
+
+/**
+ * Nasim Style - Mobile-First App Architecture & Phone-Only Account System
+ * Prefix: ns_acc_
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+/**
+ * ۱. بارگذاری استایل‌ها و حذف استایل‌های مزاحم پیش‌فرض در صفحه حساب کاربری
+ */
+add_action( 'wp_enqueue_scripts', 'ns_acc_enqueue_assets', 999 );
+function ns_acc_enqueue_assets() {
+    if ( function_exists( 'is_account_page' ) && is_account_page() ) {
+        wp_enqueue_style(
+            'ns-vazirmatn-font',
+            'https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css',
+            array(),
+            '33.003'
+        );
+
+        wp_enqueue_style(
+            'nasim-myaccount-style',
+            get_stylesheet_directory_uri() . '/assets/css/nasim-myaccount.css',
+            array( 'ns-vazirmatn-font' ),
+            '2.0.0'
+        );
+    }
+}
+
+/**
+ * ۲. تابع کمکی تبدیل اعداد فارسی و عربی به انگلیسی (رفع باگ کیبورد فارسی موبایل)
+ */
+function ns_acc_convert_persian_numbers( $string ) {
+    $persian = array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' );
+    $arabic  = array( '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' );
+    $english = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
+
+    $string = str_replace( $persian, $english, $string );
+    $string = str_replace( $arabic, $english, $string );
+    return preg_replace( '/[^0-9]/', '', $string );
+}
+
+/**
+ * ۳. دریافت شماره موبایل کاربر (سازگار با متاهای ووکامرس، دیجیتس و شاهکار)
+ */
+function ns_acc_get_user_phone( $user_id ) {
+    $meta_keys = array( 'billing_phone', 'digits_phone_no', 'digits_phone', 'mobile' );
+    foreach ( $meta_keys as $key ) {
+        $phone = get_user_meta( $user_id, $key, true );
+        if ( ! empty( $phone ) ) {
+            return $phone;
+        }
+    }
+    // اگر نام کاربری خودش شماره موبایل بود
+    $user = get_userdata( $user_id );
+    if ( $user && preg_match( '/^09[0-9]{9}$/', $user->user_login ) ) {
+        return $user->user_login;
+    }
+    return '';
+}
+
+/**
+ * ۴. حذف کامل الزام ایمیل در فرم ویرایش حساب کاربری و جایگزینی با شماره موبایل
+ */
+add_action( 'woocommerce_save_account_details_errors', 'ns_acc_handle_phone_only_account', 5, 2 );
+function ns_acc_handle_phone_only_account( &$errors, &$user ) {
+    $current_user = wp_get_current_user();
+
+    // دریافت و نرمال‌سازی شماره موبایل ارسال‌شده
+    $raw_phone = isset( $_POST['account_billing_phone'] ) ? wp_unslash( $_POST['account_billing_phone'] ) : '';
+    $phone     = ns_acc_convert_persian_numbers( $raw_phone );
+
+    if ( empty( $phone ) || ! preg_match( '/^09[0-9]{9}$/', $phone ) ) {
+        $errors->add( 'billing_phone_error', 'لطفاً یک شماره موبایل معتبر ۱۱ رقمی (مثال: 09123456789) وارد نمایید.' );
+    } else {
+        // بررسی عدم تکراری بودن شماره موبایل برای کاربر دیگر
+        $existing_users = get_users( array(
+            'meta_key'   => 'billing_phone',
+            'meta_value' => $phone,
+            'exclude'    => array( $current_user->ID ),
+            'number'     => 1,
+            'fields'     => 'ID',
+        ) );
+
+        if ( ! empty( $existing_users ) ) {
+            $errors->add( 'billing_phone_exists', 'این شماره موبایل پیش‌تر برای حساب کاربری دیگری ثبت شده است.' );
+        } else {
+            $_POST['account_billing_phone'] = $phone;
+        }
+    }
+
+    // تنظیم خودکار نام نمایشی بر اساس نام و نام خانوادگی
+    $first_name = isset( $_POST['account_first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['account_first_name'] ) ) : '';
+    $last_name  = isset( $_POST['account_last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['account_last_name'] ) ) : '';
+    if ( ! empty( $first_name ) || ! empty( $last_name ) ) {
+        $full_name = trim( $first_name . ' ' . $last_name );
+        $_POST['account_display_name'] = $full_name;
+        $user->display_name            = $full_name;
+    }
+
+    // دور زدن الزام ایمیل در هسته ووکامرس بدون خطا
+    if ( ! empty( $current_user->user_email ) ) {
+        $_POST['account_email'] = $current_user->user_email;
+        $user->user_email       = $current_user->user_email;
+    } else {
+        $fallback_phone         = ! empty( $phone ) ? $phone : $current_user->ID;
+        $generated_email        = $fallback_phone . '@nasimstyle.local';
+        $_POST['account_email'] = $generated_email;
+        $user->user_email       = $generated_email;
+    }
+}
+
+// ذخیره شماره موبایل در متای کاربر پس از تایید فرم
+add_action( 'woocommerce_save_account_details', 'ns_acc_save_mobile_field', 10, 1 );
+function ns_acc_save_mobile_field( $user_id ) {
+    if ( ! empty( $_POST['account_billing_phone'] ) ) {
+        $phone = ns_acc_convert_persian_numbers( wp_unslash( $_POST['account_billing_phone'] ) );
+        update_user_meta( $user_id, 'billing_phone', $phone );
+    }
+}
+
+/**
+ * ۵. حذف فیلد ایمیل از فرم آدرس‌های ووکامرس و بهینه‌سازی فیلدهای ایران
+ */
+add_filter( 'woocommerce_billing_fields', 'ns_acc_remove_billing_email_field', 999 );
+function ns_acc_remove_billing_email_field( $fields ) {
+    if ( isset( $fields['billing_email'] ) ) {
+        unset( $fields['billing_email'] );
+    }
+    if ( isset( $fields['billing_phone'] ) ) {
+        $fields['billing_phone']['label']    = 'شماره موبایل تحویل‌گیرنده';
+        $fields['billing_phone']['required'] = true;
+        $fields['billing_phone']['clear']    = true;
+    }
+    return $fields;
+}
+
+add_filter( 'woocommerce_default_address_fields', 'ns_acc_customize_iran_address_fields', 999 );
+function ns_acc_customize_iran_address_fields( $fields ) {
+    unset( $fields['company'] );
+    unset( $fields['address_2'] );
+
+    $fields['first_name']['label']       = 'نام تحویل‌گیرنده';
+    $fields['last_name']['label']        = 'نام خانوادگی تحویل‌گیرنده';
+    $fields['state']['label']            = 'استان';
+    $fields['city']['label']             = 'شهر';
+    $fields['address_1']['label']        = 'نشانی دقیق پستی (خیابان، کوچه، پلاک، واحد)';
+    $fields['address_1']['placeholder']  = 'مثال: خیابان شریعتی، کوچه یاس، پلاک ۱۲، واحد ۴';
+    $fields['postcode']['label']         = 'کد پستی ۱۰ رقمی';
+
+    return $fields;
+}
+
+/**
+ * ۶. شخصی‌سازی منوی حساب کاربری
+ */
+add_filter( 'woocommerce_account_menu_items', 'ns_acc_customize_menu_items', 999, 1 );
+function ns_acc_customize_menu_items( $items ) {
+    $new_items = array(
+        'dashboard'    => 'پیشخوان',
+        'orders'       => 'سفارش‌ها',
+        'edit-address' => 'آدرس‌ها',
+        'edit-account' => 'پروفایل من',
+    );
+
+    if ( defined( 'YITH_WCWL' ) || class_exists( 'TInvWL_Public_AddToWishlist' ) || isset( $items['wishlist'] ) ) {
+        $new_items['wishlist'] = 'علاقه‌مندی‌ها';
+    }
+
+    $new_items['customer-logout'] = 'خروج';
+
+    return $new_items;
+}
+
+/**
+ * ۷. آیکون‌های SVG اختصاصی
+ */
+function ns_acc_get_svg_icon( $name ) {
+    $icons = array(
+        'jasmine'         => '<svg class="ns-acc-jasmine-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 6C26 16 26 24 32 30C38 24 38 16 32 6Z" fill="currentColor" fill-opacity="0.25"/><path d="M56 32C46 26 38 26 32 32C38 38 46 38 56 32Z" fill="currentColor" fill-opacity="0.25"/><path d="M32 58C38 48 38 40 32 34C26 40 26 48 32 58Z" fill="currentColor" fill-opacity="0.25"/><path d="M8 32C18 38 26 38 32 32C26 26 18 26 8 32Z" fill="currentColor" fill-opacity="0.25"/><path d="M49 15C39 18 34 24 34 30C40 30 46 25 49 15Z" fill="currentColor" fill-opacity="0.15"/><path d="M49 49C46 39 40 34 34 34C34 40 39 46 49 49Z" fill="currentColor" fill-opacity="0.15"/><path d="M15 49C25 46 30 40 30 34C24 34 18 39 15 49Z" fill="currentColor" fill-opacity="0.15"/><path d="M15 15C18 25 24 30 30 30C30 24 25 18 15 15Z" fill="currentColor" fill-opacity="0.15"/><circle cx="32" cy="32" r="4" fill="currentColor" fill-opacity="0.5"/></svg>',
+        'dashboard'       => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>',
+        'orders'          => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+        'edit-address'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+        'edit-account'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+        'wishlist'        => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+        'customer-logout' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
+        'edit'            => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+        'calendar'        => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+        'phone'           => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+        'chevron-left'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+    );
+    return isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['dashboard'];
+}
+
+
+
+/**
+ * ۸. اسکرول خودکار نوار منوی موبایل روی تب فعال برای تجربه کاربری نرم‌تر
+ */
+add_action( 'wp_footer', 'ns_acc_mobile_nav_auto_center', 99 );
+function ns_acc_mobile_nav_auto_center() {
+    if ( function_exists( 'is_account_page' ) && is_account_page() ) : ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var activeTab = document.querySelector('.ns-acc-nav__item--active');
+            var navList = document.querySelector('.ns-acc-nav__list');
+            if (activeTab && navList && window.innerWidth <= 991) {
+                var scrollPos = activeTab.offsetLeft - (navList.clientWidth / 2) + (activeTab.clientWidth / 2);
+                navList.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }
+        });
+        </script>
+    <?php endif;
+}
