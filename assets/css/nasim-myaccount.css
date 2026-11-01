@@ -2,18 +2,17 @@
  * Nasim Style - Custom WooCommerce My Account Stylesheet (v2.1 - Theme Header/Footer Safe)
  * Visual Identity: Jasmine Flower, Soft Lilac & In-Page Mobile App Navigation
  */
-
 .ns-acc-wrapper {
-    /* پالت رنگی اختصاصی نسیم استایل */
-    --ns-lilac-light: #E6D5F2;
-    --ns-lilac-soft: #D8B4E2;
-    --ns-lilac-purple: #B68BC9;
-    --ns-purple-dark: #735080;
+    /* پالت رنگی اختصاصی نسیم استایل (هماهنگ با یاسی پررنگ سایت) */
+    --ns-lilac-light: #EFE6F7;                   /* یاسی خیلی روشن */
+    --ns-lilac-soft: var(--secondary-color);     /* #C39BD3 - یاسی ملایم مکمل */
+    --ns-lilac-purple: var(--primary-color);     /* #7E52A0 - یاسی پررنگ اصلی */
+    --ns-purple-dark: var(--primary-dark);       /* #5E3A7A - یاسی تیره برای کنتراست و هاور */
     --ns-white: #FFFFFF;
-    --ns-bg-soft: #FCF9FE;
-    --ns-text-main: #302638;
-    --ns-text-muted: #82758A;
-    --ns-border-color: #EFE6F7;
+    --ns-bg-soft: var(--soft-lilac-bg);          /* #F8F4FA - پس‌زمینه یاسی ملایم */
+    --ns-text-main: var(--text-color);           /* #333333 */
+    --ns-text-muted: var(--text-muted);          /* #777777 */
+    --ns-border-color: #E5D4F0;                  /* کادر یاسی هماهنگ */
 
     /* رنگ‌های وضعیت */
     --ns-success-bg: #EDF7F2;
@@ -21,15 +20,15 @@
     --ns-warning-bg: #FEF6E7;
     --ns-warning-text: #9C6515;
     --ns-danger-bg: #FDEEEF;
-    --ns-danger-text: #A43540;
+    --ns-danger-text: var(--danger-color);       /* #E74C3C */
 
-    /* ابعاد و سایه‌ها */
+    /* ابعاد و سایه‌ها (تنظیم‌شده بر اساس RGB یاسی پررنگ) */
     --ns-radius-xl: 24px;
     --ns-radius-lg: 18px;
     --ns-radius-md: 14px;
     --ns-radius-sm: 10px;
-    --ns-shadow-soft: 0 10px 30px -5px rgba(115, 80, 128, 0.06), 0 4px 12px -2px rgba(182, 139, 201, 0.04);
-    --ns-shadow-hover: 0 14px 35px -5px rgba(115, 80, 128, 0.12);
+    --ns-shadow-soft: 0 10px 30px -5px rgba(126, 82, 160, 0.08), 0 4px 12px -2px rgba(195, 155, 211, 0.06);
+    --ns-shadow-hover: 0 14px 35px -5px rgba(126, 82, 160, 0.16);
     --ns-transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 
     font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif !important;
